@@ -7,7 +7,10 @@ trait EngineTrait{
 }
 
 trait FlyableTrait{
-    abstract public function fly();
+    //abstract public function fly();
+    public function hello(){
+        echo "I can fly";
+    }
 }
 
 // trait FlyableTrait{
@@ -18,24 +21,28 @@ trait FlyableTrait{
 
 class plain
 {
-    use EngineTrait, FlyableTrait;
-
-    public function fly()
-    {
-        echo "I am flying at 800 km/h speed";   
+    use EngineTrait, FlyableTrait{
+        FlyableTrait::hello insteadOf EngineTrait;
+        EngineTrait::hello as engineHello;
     }
-}
-class Helicopter
-{
-    use EngineTrait, FlyableTrait;
 
-    public function fly()
-    {
-        echo "I am flying at 300 km/h speed";   
-    }
+    // public function fly()
+    // {
+    //     echo "I am flying at 800 km/h speed";   
+    // }
 }
+// class Helicopter
+// {
+//     use EngineTrait, FlyableTrait;
+
+//     public function fly()
+//     {
+//         echo "I am flying at 300 km/h speed";   
+//     }
+// }
 
 $plain = new Plain();
-$helicopter = new Helicopter();
-$plain->fly();
-$helicopter->fly();
+//$helicopter = new Helicopter();
+$plain->hello();
+//$helicopter->fly();
+$plain->engineHello();
